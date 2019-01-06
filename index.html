@@ -5,7 +5,6 @@ layout: default
     <div class="row">
         <div class="col">
             <nav class="navbar navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -15,12 +14,26 @@ layout: default
                             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#">Configuratie</a>
                         </li>
                 </div>
             </nav>
-            <h1 class="text-primary">Hello there!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium corporis ipsam cumque rerum quas quia neque, dolor vitae laboriosam.</p>
+            <h1 class="text-primary">Aquarium Dosing pumps</h1>
+            <p>Hier kan je de aquarium doseerpomp schema's aansturen.</p>
+            <hr>
+            <br>
+            <h2>Dosering</h2>
+            <p>vul hier in hoeveel vloeistof er gegeven moet worden per dosering. Invullen als ml</p>
+            <p> Pomp1: <input type="number" name="pomp1" min="0" max="100" step="1" value="25">
+        	</p>
+        	<p> Pomp2: <input type="number" name="pomp2" min="0" max="100" step="1" value="25">
+        	</p>
+        	<p> Pomp3: <input type="number" name="pomp3" min="0" max="100" step="1" value="25">
+        	</p>
+        	<p> Pomp4: <input type="number" name="pomp4" min="0" max="100" step="1" value="25">
+        	</p>  
+        	<br>   
+        	<p>In dit tabel kan aangegeven worden welke pomp op welke dag moet doseren.</p>   	        	
             <table class="table">
                 <tr>
                     <th></th>
@@ -73,6 +86,23 @@ layout: default
                     <td><input type="checkbox" name="pomp4zondag"></td>
                 </tr>
             </table>
+            <input type="submit">
+            <br>
+            <br>
+            <h2>Kalibratie doring pomp</h2>
+            <p>hier moet de aantal seconden (x,x) aangegeven worden hoe lang het duurt om 1ml te pompen.</p>
+            <input type="number" name="quantity" min="0" max="100" step="0.01" value="1.5">
+            <input type="submit">
+            <p>Test de pomps en / of 
+            <br>
+            <hr>
+            <h2>Grote van reservoirs</h2>
+            <p>Hoe groot zijn de reservoirs? dit kan ingevuld worden, om een indicatie te geven hoeveel vloeistof er nog beschikbaar is.
+                Invullen als ml</p>
+            <input type="number" name="quantity" min="0" max="100" step="10" value="500">
+            <input type="submit">
+            <br>
+            <br>
         </div>
     </div>
 </div>
