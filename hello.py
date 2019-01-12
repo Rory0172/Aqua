@@ -17,7 +17,7 @@ def login():
     return render_template('index.html')
 
 @app.route('/pomp', methods=['GET'])			#URL to INI config
-def do_this():
+def pomp():
 	pomp1ml = request.args.get('pomp1ml')
 	pomp2ml = request.args.get('pomp2ml')
 	pomp3ml = request.args.get('pomp3ml')
@@ -54,12 +54,11 @@ def do_this():
 	pomp4vrijdag = request.args.get('pomp4vrijdag')
 	pomp4zaterdag = request.args.get('pomp4zaterdag')
 	pomp4zondag= request.args.get('pomp4zondag')
-
 	
 	config = ConfigParser()
 
 # parse existing file
-	config.read('next.ini')
+	config.read('settings.ini')
 	config.set('pomp', 'pomp1ml', str(pomp1ml))
 	config.set('pomp', 'pomp2ml', str(pomp2ml))
 	config.set('pomp', 'pomp3ml', str(pomp3ml))
@@ -97,17 +96,59 @@ def do_this():
 	config.set('pomp', 'pomp4zaterdag', str(pomp4zaterdag))
 	config.set('pomp', 'pomp4zondag', str(pomp4zondag))
 
-
-
-
-# add a new section and some values
-	#config.add_section('section_b')
-	#config.set('section_b', 'meal_val', 'spam')
-	#config.set('section_b', 'not_found_val', 404)
-
-# save to a file
-	with open('next.ini', 'w') as configfile:
+	with open('settings.ini', 'w') as configfile:
 		config.write(configfile)
+		return render_template('index.html')
+
+@app.route('/mlpersec', methods=['GET'])			#URL to INI config
+def mlpersec():
+	mlpersec = request.args.get('mlpersec')
+	
+	config = ConfigParser()
+# parse existing file
+	config.read('settings.ini')
+	config.set('mlpersec', 'mlpersec', str(mlpersec))
+
+	with open('settings.ini', 'w') as configfile1:
+		config.write(configfile1)
+		return render_template('index.html')
+
+@app.route('/reservoir', methods=['GET'])			#URL to INI config
+def reservoir():
+	reservoir1 = request.args.get('reservoir1')
+	reservoir2 = request.args.get('reservoir2')
+	reservoir3 = request.args.get('reservoir3')
+	reservoir4 = request.args.get('reservoir4')
+
+	config = ConfigParser()
+# parse existing file
+	config.read('settings.ini')
+	config.set('reservoir', 'reservoir1', str(reservoir1))
+	config.set('reservoir', 'reservoir2', str(reservoir2))
+	config.set('reservoir', 'reservoir3', str(reservoir3))
+	config.set('reservoir', 'reservoir4', str(reservoir4))
+
+	with open('settings.ini', 'w') as configfile2:
+		config.write(configfile2)
+		return render_template('index.html')
+
+@app.route('/gpio', methods=['GET'])			#URL to INI config
+def gpio():
+	doseerpompgpio1 = request.args.get('doseerpompgpio1')
+	doseerpompgpio2 = request.args.get('doseerpompgpio2')
+	doseerpompgpio3 = request.args.get('doseerpompgpio3')
+	doseerpompgpio4 = request.args.get('doseerpompgpio4')
+
+	config = ConfigParser()
+# parse existing file
+	config.read('settings.ini')
+	config.set('gpio', 'doseerpompgpio1', str(doseerpompgpio1))
+	config.set('gpio', 'doseerpompgpio2', str(doseerpompgpio2))
+	config.set('gpio', 'doseerpompgpio3', str(doseerpompgpio3))
+	config.set('gpio', 'doseerpompgpio4', str(doseerpompgpio4))
+
+	with open('settings.ini', 'w') as configfile2:
+		config.write(configfile2)
 		return render_template('index.html')
 
 if __name__ == '__main__':

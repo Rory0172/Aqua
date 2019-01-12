@@ -7,9 +7,9 @@ config = ConfigParser()
 config.read('next.ini')
 
 # read values from a section
-#string_val = config.get('section_a', 'string_val')
-bool_val = config.getboolean('section_a', 'bool_val')
-int_val = config.getint('section_a', 'int_val')
+mlpersec = config.get('mlpersec', 'mlpersec')
+bool_val = config.getboolean('pomp', 'bool_val')
+int_val = config.getint('pomp', 'int_val')
 #float_val = config.getfloat('section_a', 'pi_val')
 print (int_val)
 # update existing value
