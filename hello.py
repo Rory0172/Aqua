@@ -18,6 +18,7 @@ def login():
 
 @app.route('/pomp', methods=['GET'])			#URL to INI config
 def pomp():
+	#Get info from URL
 	pomp1ml = request.args.get('pomp1ml')
 	pomp2ml = request.args.get('pomp2ml')
 	pomp3ml = request.args.get('pomp3ml')
@@ -54,63 +55,54 @@ def pomp():
 	pomp4vrijdag = request.args.get('pomp4vrijdag')
 	pomp4zaterdag = request.args.get('pomp4zaterdag')
 	pomp4zondag= request.args.get('pomp4zondag')
-	
-	config = ConfigParser()
+
+	pomp1 = str(pomp1maandag) + str(pomp1dinsdag) + str(pomp1woensdag) + str(pomp1donderdag) + str(pomp1vrijdag) + str(pomp1zaterdag) + str(pomp1zondag)
+	pomp1clean = pomp1.replace('None', '')
+	pomp2 = str(pomp2maandag) + str(pomp2dinsdag) + str(pomp2woensdag) + str(pomp2donderdag) + str(pomp2vrijdag) + str(pomp2zaterdag) + str(pomp2zondag)
+	pomp2clean = pomp2.replace('None', '')
+	pomp3 = str(pomp3maandag) + str(pomp3dinsdag) + str(pomp3woensdag) + str(pomp3donderdag) + str(pomp3vrijdag) + str(pomp3zaterdag) + str(pomp3zondag)
+	pomp3clean = pomp3.replace('None', '')
+	pomp4 = str(pomp4maandag) + str(pomp4dinsdag) + str(pomp4woensdag) + str(pomp4donderdag) + str(pomp4vrijdag) + str(pomp4zaterdag) + str(pomp4zondag)
+	pomp4clean = pomp4.replace('None', '')
+
+	print (pomp1maandag)
+
+	config = ConfigParser(allow_no_value=True)
 
 # parse existing file
 	config.read('settings.ini')
+
+	#Get info from existing config file
+	getpomp1ml = config.get('pomp', 'pomp1ml')
+	getpomp2ml = config.get('pomp', 'pomp2ml')
+	getpomp3ml = config.get('pomp', 'pomp3ml')
+	getpomp4ml = config.get('pomp', 'pomp4ml')
+
 	config.set('pomp', 'pomp1ml', str(pomp1ml))
 	config.set('pomp', 'pomp2ml', str(pomp2ml))
 	config.set('pomp', 'pomp3ml', str(pomp3ml))
 	config.set('pomp', 'pomp4ml', str(pomp4ml))
 
-	config.set('pomp', 'pomp1maandag', str(pomp1maandag))
-	config.set('pomp', 'pomp1dinsdag', str(pomp1dinsdag))
-	config.set('pomp', 'pomp1woensdag', str(pomp1woensdag))
-	config.set('pomp', 'pomp1donderdag', str(pomp1donderdag))
-	config.set('pomp', 'pomp1vrijdag', str(pomp1vrijdag))
-	config.set('pomp', 'pomp1zaterdag', str(pomp1zaterdag))
-	config.set('pomp', 'pomp1zondag', str(pomp1zondag))
-
-	config.set('pomp', 'pomp2maandag', str(pomp2maandag))
-	config.set('pomp', 'pomp2dinsdag', str(pomp2dinsdag))
-	config.set('pomp', 'pomp2woensdag', str(pomp2woensdag))
-	config.set('pomp', 'pomp2donderdag', str(pomp2donderdag))
-	config.set('pomp', 'pomp2vrijdag', str(pomp2vrijdag))
-	config.set('pomp', 'pomp2zaterdag', str(pomp2zaterdag))
-	config.set('pomp', 'pomp2zondag', str(pomp2zondag))
-
-	config.set('pomp', 'pomp3maandag', str(pomp3maandag))
-	config.set('pomp', 'pomp3dinsdag', str(pomp3dinsdag))
-	config.set('pomp', 'pomp3woensdag', str(pomp3woensdag))
-	config.set('pomp', 'pomp3donderdag', str(pomp3donderdag))
-	config.set('pomp', 'pomp3vrijdag', str(pomp3vrijdag))
-	config.set('pomp', 'pomp3zaterdag', str(pomp3zaterdag))
-	config.set('pomp', 'pomp3zondag', str(pomp3zondag))
-
-	config.set('pomp', 'pomp4maandag', str(pomp4maandag))
-	config.set('pomp', 'pomp4dinsdag', str(pomp4dinsdag))
-	config.set('pomp', 'pomp4woensdag', str(pomp4woensdag))
-	config.set('pomp', 'pomp4donderdag', str(pomp4donderdag))
-	config.set('pomp', 'pomp4vrijdag', str(pomp4vrijdag))
-	config.set('pomp', 'pomp4zaterdag', str(pomp4zaterdag))
-	config.set('pomp', 'pomp4zondag', str(pomp4zondag))
+	config.set('pomp', 'pomp1', str(pomp1clean))
+	config.set('pomp', 'pomp2', str(pomp2clean))
+	config.set('pomp', 'pomp3', str(pomp3clean))
+	config.set('pomp', 'pomp4', str(pomp4clean))
 
 	with open('settings.ini', 'w') as configfile:
 		config.write(configfile)
-		return render_template('index.html')
+		return render_template('index.html', getpomp2ml=getpomp2ml, getpomp3ml=getpomp3ml, getpomp4ml=getpomp4ml)
 
 @app.route('/mlpersec', methods=['GET'])			#URL to INI config
 def mlpersec():
 	mlpersec = request.args.get('mlpersec')
 	
-	config = ConfigParser()
+	config = ConfigParser(allow_no_value=True)
 # parse existing file
 	config.read('settings.ini')
 	config.set('mlpersec', 'mlpersec', str(mlpersec))
 
-	with open('settings.ini', 'w') as configfile1:
-		config.write(configfile1)
+	with open('settings.ini', 'w') as configfile:
+		config.write(configfile)
 		return render_template('index.html')
 
 @app.route('/reservoir', methods=['GET'])			#URL to INI config
@@ -120,7 +112,7 @@ def reservoir():
 	reservoir3 = request.args.get('reservoir3')
 	reservoir4 = request.args.get('reservoir4')
 
-	config = ConfigParser()
+	config = ConfigParser(allow_no_value=True)
 # parse existing file
 	config.read('settings.ini')
 	config.set('reservoir', 'reservoir1', str(reservoir1))
@@ -128,8 +120,8 @@ def reservoir():
 	config.set('reservoir', 'reservoir3', str(reservoir3))
 	config.set('reservoir', 'reservoir4', str(reservoir4))
 
-	with open('settings.ini', 'w') as configfile2:
-		config.write(configfile2)
+	with open('settings.ini', 'w') as configfile:
+		config.write(configfile)
 		return render_template('index.html')
 
 @app.route('/gpio', methods=['GET'])			#URL to INI config
@@ -139,7 +131,7 @@ def gpio():
 	doseerpompgpio3 = request.args.get('doseerpompgpio3')
 	doseerpompgpio4 = request.args.get('doseerpompgpio4')
 
-	config = ConfigParser()
+	config = ConfigParser(allow_no_value=True)
 # parse existing file
 	config.read('settings.ini')
 	config.set('gpio', 'doseerpompgpio1', str(doseerpompgpio1))
@@ -147,9 +139,22 @@ def gpio():
 	config.set('gpio', 'doseerpompgpio3', str(doseerpompgpio3))
 	config.set('gpio', 'doseerpompgpio4', str(doseerpompgpio4))
 
-	with open('settings.ini', 'w') as configfile2:
-		config.write(configfile2)
+	with open('settings.ini', 'w') as configfile:
+		config.write(configfile)
+		return render_template('index.html')
+
+@app.route('/time', methods=['GET'])			#URL to INI config
+def time():
+	time = request.args.get('time')
+
+	config = ConfigParser()
+# parse existing file
+	config.read('settings.ini')
+	config.set('time', 'time', str(time))
+
+	with open('settings.ini', 'w') as configfile:
+		config.write(configfile)
 		return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host = '0.0.0.0',port=8080)
