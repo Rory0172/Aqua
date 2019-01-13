@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from configparser import ConfigParser
 
 
@@ -155,6 +155,10 @@ def time():
 	with open('settings.ini', 'w') as configfile:
 		config.write(configfile)
 		return render_template('index.html')
+
+@app.route('/dashboard')
+def dashboard():
+   return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0',port=8080)
