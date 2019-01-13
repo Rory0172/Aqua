@@ -26,9 +26,8 @@ def home():
 @app.route('/setup', methods=['GET'])			#URL to INI config
 def setup():
 	_web_functions.get_volumes_client(volumes)
-	print(volumes.pomp_1_volume)
-	# _web_functions.get_schedules_client(schedules)
-	_web_functions.set_config(volumes)
+	_web_functions.get_schedules_client(schedules)
+	_web_functions.set_config(volumes, schedules)
 	return render_template('index.html',getpomp1ml=volumes.pomp_1_volume, getpomp2ml=volumes.pomp_2_volume, getpomp3ml=volumes.pomp_3_volume, getpomp4ml=volumes.pomp_4_volume)
 
 @app.route('/;', methods=['GET'])			#URL to INI config

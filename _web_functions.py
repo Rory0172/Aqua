@@ -42,14 +42,10 @@ def get_schedules_client(self):
   pomp4zaterdag = request.args.get('pomp4zaterdag')
   pomp4zondag= request.args.get('pomp4zondag')
 
-  self.schedule_pomp_1 = str(pomp1maandag) + str(pomp1dinsdag) + str(pomp1woensdag) + str(pomp1donderdag) + str(pomp1vrijdag) + str(pomp1zaterdag) + str(pomp1zondag)
-  self.schedule_pomp_1.replace('None', '')
-  self.schedule_pomp_2 = str(pomp2maandag) + str(pomp2dinsdag) + str(pomp2woensdag) + str(pomp2donderdag) + str(pomp2vrijdag) + str(pomp2zaterdag) + str(pomp2zondag)
-  self.schedule_pomp_2.replace('None', '')
-  self.schedule_pomp_3 = str(pomp3maandag) + str(pomp3dinsdag) + str(pomp3woensdag) + str(pomp3donderdag) + str(pomp3vrijdag) + str(pomp3zaterdag) + str(pomp3zondag)
-  self.schedule_pomp_3.replace('None', '')
-  self.schedule_pomp_4 = str(pomp4maandag) + str(pomp4dinsdag) + str(pomp4woensdag) + str(pomp4donderdag) + str(pomp4vrijdag) + str(pomp4zaterdag) + str(pomp4zondag)
-  self.schedule_pomp_4.replace('None', '')
+  self.schedule_pomp_1 = (str(pomp1maandag) + str(pomp1dinsdag) + str(pomp1woensdag) + str(pomp1donderdag) + str(pomp1vrijdag) + str(pomp1zaterdag) + str(pomp1zondag)).replace("None", '')
+  self.schedule_pomp_2 = (str(pomp2maandag) + str(pomp2dinsdag) + str(pomp2woensdag) + str(pomp2donderdag) + str(pomp2vrijdag) + str(pomp2zaterdag) + str(pomp2zondag)).replace("None", '')
+  self.schedule_pomp_3 = (str(pomp3maandag) + str(pomp3dinsdag) + str(pomp3woensdag) + str(pomp3donderdag) + str(pomp3vrijdag) + str(pomp3zaterdag) + str(pomp3zondag)).replace('None', '')
+  self.schedule_pomp_4 = (str(pomp4maandag) + str(pomp4dinsdag) + str(pomp4woensdag) + str(pomp4donderdag) + str(pomp4vrijdag) + str(pomp4zaterdag) + str(pomp4zondag)).replace('None', '')
   return self
 
 def get_config(self):
@@ -64,18 +60,23 @@ def get_config(self):
   self.pomp_4_volume = config.get('pomp', 'pomp4ml')
   return self
 
-def set_config(self):
+def set_config(volumes, schedules):
   config = ConfigParser()
   config.read('settings.ini')
-  config.set('pomp', 'pomp1ml', str(self.pomp_1_volume))
-  config.set('pomp', 'pomp2ml', str(self.pomp_2_volume))
-  config.set('pomp', 'pomp3ml', str(self.pomp_3_volume))
-  config.set('pomp', 'pomp4ml', str(self.pomp_4_volume))
+  config.set('pomp', 'pomp1ml', str(volumes.pomp_1_volume))
+  config.set('pomp', 'pomp2ml', str(volumes.pomp_2_volume))
+  config.set('pomp', 'pomp3ml', str(volumes.pomp_3_volume))
+  config.set('pomp', 'pomp4ml', str(volumes.pomp_4_volume))
+  config.set('pomp', 'pomp1', str(schedules.schedule_pomp_1))
+  config.set('pomp', 'pomp2', str(schedules.schedule_pomp_2))
+  config.set('pomp', 'pomp3', str(schedules.schedule_pomp_3))
+  config.set('pomp', 'pomp4', str(schedules.schedule_pomp_4))
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
-  return self
+  return volumes, schedules
 
-  # config.set('pomp', 'pomp1', str(pomp1clean))
-  # config.set('pomp', 'pomp2', str(pomp2clean))
-  # config.set('pomp', 'pomp3', str(pomp3clean))
-  # config.set('pomp', 'pomp4', str(pomp4clean))
+def set_schedules_config(self):
+  config.set('pomp', 'pomp1', str(pomp1clean))
+  config.set('pomp', 'pomp2', str(pomp2clean))
+  config.set('pomp', 'pomp3', str(pomp3clean))
+  config.set('pomp', 'pomp4', str(pomp4clean))
