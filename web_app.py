@@ -26,18 +26,28 @@ class gpio:
   pomp_3_gpio = 0
   pomp_4_gpio = 0
 
+class time:
+  time = 0  
+
+class mlpersec:
+  mlpersec = 0 
+
 app = Flask(__name__)
 volumes = Volumes()
 schedules = Schedules()
 volume_reservoirs = volume_reservoirs()
 gpio = gpio()
+time = time()
+mlpersec = mlpersec()
 
 @app.route('/')
 def home():
 	_web_functions.get_config_volume(volumes)
 	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
 	_web_functions.get_config_gpio(gpio)
-	return render_template('index.html',getpomp1ml=volumes.pomp_1_volume, getpomp2ml=volumes.pomp_2_volume, getpomp3ml=volumes.pomp_3_volume, getpomp4ml=volumes.pomp_4_volume, vol_res_1=volume_reservoirs.pomp_1_volume_reservoir, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir, pomp_1_gpio=gpio.pomp_1_gpio, pomp_2_gpio=gpio.pomp_2_gpio, pomp_3_gpio=gpio.pomp_3_gpio, pomp_4_gpio=gpio.pomp_4_gpio)
+	_web_functions.get_config_time(time)
+	_web_functions.get_config_mlpersec(mlpersec)
+	return render_template('index.html',getpomp1ml=volumes.pomp_1_volume, getpomp2ml=volumes.pomp_2_volume, getpomp3ml=volumes.pomp_3_volume, getpomp4ml=volumes.pomp_4_volume, vol_res_1=volume_reservoirs.pomp_1_volume_reservoir, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir, pomp_1_gpio=gpio.pomp_1_gpio, pomp_2_gpio=gpio.pomp_2_gpio, pomp_3_gpio=gpio.pomp_3_gpio, pomp_4_gpio=gpio.pomp_4_gpio, time=time.time, mlpersec=mlpersec.mlpersec)
 
 @app.route('/setup', methods=['GET'])			#URL to INI config
 def setup():
@@ -46,18 +56,11 @@ def setup():
 	_web_functions.set_config(volumes, schedules)
 	return render_template('index.html',getpomp1ml=volumes.pomp_1_volume, getpomp2ml=volumes.pomp_2_volume, getpomp3ml=volumes.pomp_3_volume, getpomp4ml=volumes.pomp_4_volume)
 
-@app.route('/;', methods=['GET'])			#URL to INI config
+@app.route('/mlpersec', methods=['GET'])			#URL to INI config
 def mlpersec():
-	mlpersec = request.args.get('mlpersec')
-
-	config = ConfigParser(allow_no_value=True)
-# parse existing file
-	config.read('settings.ini')
-	config.set('mlpersec', 'mlpersec', str(mlpersec))
-
-	with open('settings.ini', 'w') as configfile:
-		config.write(configfile)
-		return render_template('index.html')
+	_web_functions.get_mlpersec_client(mlpersec)
+	_web_functions.set_config_mlpersec(mlpersec)
+	return render_template('index.html', mlpersec=mlpersec.mlpersec)
 
 @app.route('/reservoir', methods=['GET'])			#URL to INI config
 def reservoir():
@@ -73,16 +76,9 @@ def gpio():
 
 @app.route('/time', methods=['GET'])			#URL to INI config
 def time():
-	time = request.args.get('time')
-
-	config = ConfigParser()
-# parse existing file
-	config.read('settings.ini')
-	config.set('time', 'time', str(time))
-
-	with open('settings.ini', 'w') as configfile:
-		config.write(configfile)
-		return render_template('index.html')
+	_web_functions.get_time_client(time)
+	_web_functions.set_config_time(time)
+	return render_template('index.html', time=time.time)
 
 @app.route('/dashboard')
 def dashboard():

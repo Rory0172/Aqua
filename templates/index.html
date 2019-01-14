@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Jekyll and Bootstrap</title>
+    <title>Aquarium dosing pumps</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
@@ -97,10 +97,10 @@
                 </form>
                 <br>
                 <br>
-                <form>
+                <form action="/mlpersec">
                     <h3>Kalibratie doring pomp</h3>
                     <p>hier moet de aantal seconden (x,x) aangegeven worden hoe lang het duurt om 1ml te pompen.</p>
-                    <input type="number" name="mlpersec" min="0" max="100" step="0.01" value="1.5">
+                    <input type="number" name="mlpersec" min="0" max="100" step="0.01" value="{{ mlpersec }}">
                     <input type="submit">
                 </form>
                 <p>Test de pomps en / of ontlucht de slangen.
@@ -123,10 +123,10 @@
                     </form>
                     <br>
                     <hr>
-                    <form>
+                    <form action="/time">
                         <h3>Hoelaat moet er gedoseert worden</h3>
                         <p>Op welk tijdstip moet er gedoseert worden?</p>
-                        <input type="time" name="time" value="23:00">
+                        <input type="time" name="time" value="{{ time }}">
                         <input type="submit"> <br>
                     </form>
                     <br>

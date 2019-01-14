@@ -61,6 +61,14 @@ def get_gpio_client(self):
   self.pomp_4_gpio = request.args.get('pomp4gpio')
   return self
 
+def get_time_client(self):
+  self.time = request.args.get('time')
+  return self
+
+def get_mlpersec_client(self):
+  self.mlpersec = request.args.get('mlpersec')
+  return self
+
 def get_config_volume(self):
   config = ConfigParser(allow_no_value=True)
   config.read('settings.ini')
@@ -86,6 +94,18 @@ def get_config_gpio(self):
   self.pomp_2_gpio = config.get('gpio', 'pomp_2_gpio')
   self.pomp_3_gpio = config.get('gpio', 'pomp_3_gpio')
   self.pomp_4_gpio = config.get('gpio', 'pomp_4_gpio')
+  return self
+
+def get_config_time(self):
+  config = ConfigParser(allow_no_value=True)
+  config.read('settings.ini')
+  self.time = config.get('time', 'time')
+  return self
+
+def get_config_mlpersec(self):
+  config = ConfigParser(allow_no_value=True)
+  config.read('settings.ini')
+  self.mlpersec = config.get('mlpersec', 'mlpersec')
   return self
 
 def set_config(volumes, schedules):
@@ -123,10 +143,25 @@ def set_config_gpio(gpio):
   config.set('gpio', 'pomp_2_gpio', str(gpio.pomp_2_gpio))
   config.set('gpio', 'pomp_3_gpio', str(gpio.pomp_3_gpio))
   config.set('gpio', 'pomp_4_gpio', str(gpio.pomp_4_gpio))
-  
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return gpio
+
+def set_config_time(time):
+  config = ConfigParser()
+  config.read('settings.ini')
+  config.set('time', 'time', str(time.time))
+  with open('settings.ini', 'w') as configfile:
+    config.write(configfile)
+  return time
+
+def set_config_mlpersec(mlpersec):
+  config = ConfigParser()
+  config.read('settings.ini')
+  config.set('mlpersec', 'mlpersec', str(mlpersec.mlpersec))
+  with open('settings.ini', 'w') as configfile:
+    config.write(configfile)
+  return mlpersec
 
 def set_schedules_config(self):
   config.set('pomp', 'pomp1', str(pomp1clean))
