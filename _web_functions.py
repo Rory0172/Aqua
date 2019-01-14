@@ -9,7 +9,6 @@ def get_volumes_client(self):
   return self
 
 def get_schedules_client(self):
-  #Get info from URL
   pomp1maandag = request.args.get('pomp1maandag')
   pomp1dinsdag = request.args.get('pomp1dinsdag')
   pomp1woensdag = request.args.get('pomp1woensdag')
@@ -48,16 +47,45 @@ def get_schedules_client(self):
   self.schedule_pomp_4 = (str(pomp4maandag) + str(pomp4dinsdag) + str(pomp4woensdag) + str(pomp4donderdag) + str(pomp4vrijdag) + str(pomp4zaterdag) + str(pomp4zondag)).replace('None', '')
   return self
 
-def get_config(self):
-  # parse existing file
+def get_volume_reservoirs_client(self):
+  self.pomp_1_volume_reservoir = request.args.get('reservoir1')
+  self.pomp_2_volume_reservoir = request.args.get('reservoir2')
+  self.pomp_3_volume_reservoir = request.args.get('reservoir3')
+  self.pomp_4_volume_reservoir = request.args.get('reservoir4')
+  return self
+
+def get_gpio_client(self):
+  self.pomp_1_gpio = request.args.get('pomp1gpio')
+  self.pomp_2_gpio = request.args.get('pomp2gpio')
+  self.pomp_3_gpio = request.args.get('pomp3gpio')
+  self.pomp_4_gpio = request.args.get('pomp4gpio')
+  return self
+
+def get_config_volume(self):
   config = ConfigParser(allow_no_value=True)
   config.read('settings.ini')
-
-  #Get info from existing config file
   self.pomp_1_volume = config.get('pomp', 'pomp1ml')
   self.pomp_2_volume = config.get('pomp', 'pomp2ml')
   self.pomp_3_volume = config.get('pomp', 'pomp3ml')
   self.pomp_4_volume = config.get('pomp', 'pomp4ml')
+  return self 
+
+def get_config_volume_reservoirs(self):
+  config = ConfigParser(allow_no_value=True)
+  config.read('settings.ini')
+  self.pomp_1_volume_reservoir = config.get('reservoir', 'reservoir1')
+  self.pomp_2_volume_reservoir = config.get('reservoir', 'reservoir2')
+  self.pomp_3_volume_reservoir = config.get('reservoir', 'reservoir3')
+  self.pomp_4_volume_reservoir = config.get('reservoir', 'reservoir4')
+  return self
+
+def get_config_gpio(self):
+  config = ConfigParser(allow_no_value=True)
+  config.read('settings.ini')
+  self.pomp_1_gpio = config.get('gpio', 'pomp_1_gpio')
+  self.pomp_2_gpio = config.get('gpio', 'pomp_2_gpio')
+  self.pomp_3_gpio = config.get('gpio', 'pomp_3_gpio')
+  self.pomp_4_gpio = config.get('gpio', 'pomp_4_gpio')
   return self
 
 def set_config(volumes, schedules):
@@ -71,9 +99,34 @@ def set_config(volumes, schedules):
   config.set('pomp', 'pomp2', str(schedules.schedule_pomp_2))
   config.set('pomp', 'pomp3', str(schedules.schedule_pomp_3))
   config.set('pomp', 'pomp4', str(schedules.schedule_pomp_4))
+
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return volumes, schedules
+
+def set_config_volume_reservoirs(volume_reservoirs):
+  config = ConfigParser()
+  config.read('settings.ini')
+  config.set('reservoir', 'reservoir1', str(volume_reservoirs.pomp_1_volume_reservoir))
+  config.set('reservoir', 'reservoir2', str(volume_reservoirs.pomp_2_volume_reservoir))
+  config.set('reservoir', 'reservoir3', str(volume_reservoirs.pomp_3_volume_reservoir))
+  config.set('reservoir', 'reservoir4', str(volume_reservoirs.pomp_4_volume_reservoir))
+  
+  with open('settings.ini', 'w') as configfile:
+    config.write(configfile)
+  return volume_reservoirs
+
+def set_config_gpio(gpio):
+  config = ConfigParser()
+  config.read('settings.ini')
+  config.set('gpio', 'pomp_1_gpio', str(gpio.pomp_1_gpio))
+  config.set('gpio', 'pomp_2_gpio', str(gpio.pomp_2_gpio))
+  config.set('gpio', 'pomp_3_gpio', str(gpio.pomp_3_gpio))
+  config.set('gpio', 'pomp_4_gpio', str(gpio.pomp_4_gpio))
+  
+  with open('settings.ini', 'w') as configfile:
+    config.write(configfile)
+  return gpio
 
 def set_schedules_config(self):
   config.set('pomp', 'pomp1', str(pomp1clean))

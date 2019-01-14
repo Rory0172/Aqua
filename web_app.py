@@ -14,14 +14,30 @@ class Schedules:
 	schedule_pomp_3 = 0
 	schedule_pomp_4 = 0
 
+class volume_reservoirs:
+  pomp_1_volume_reservoir = 0
+  pomp_2_volume_reservoir = 0
+  pomp_3_volume_reservoir = 0
+  pomp_4_volume_reservoir = 0
+
+class gpio:
+  pomp_1_gpio = 0
+  pomp_2_gpio = 0
+  pomp_3_gpio = 0
+  pomp_4_gpio = 0
+
 app = Flask(__name__)
 volumes = Volumes()
 schedules = Schedules()
+volume_reservoirs = volume_reservoirs()
+gpio = gpio()
 
 @app.route('/')
 def home():
-	_web_functions.get_config(volumes)
-	return render_template('index.html',getpomp1ml=volumes.pomp_1_volume, getpomp2ml=volumes.pomp_2_volume, getpomp3ml=volumes.pomp_3_volume, getpomp4ml=volumes.pomp_4_volume)
+	_web_functions.get_config_volume(volumes)
+	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
+	_web_functions.get_config_gpio(gpio)
+	return render_template('index.html',getpomp1ml=volumes.pomp_1_volume, getpomp2ml=volumes.pomp_2_volume, getpomp3ml=volumes.pomp_3_volume, getpomp4ml=volumes.pomp_4_volume, vol_res_1=volume_reservoirs.pomp_1_volume_reservoir, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir, pomp_1_gpio=gpio.pomp_1_gpio, pomp_2_gpio=gpio.pomp_2_gpio, pomp_3_gpio=gpio.pomp_3_gpio, pomp_4_gpio=gpio.pomp_4_gpio)
 
 @app.route('/setup', methods=['GET'])			#URL to INI config
 def setup():
@@ -45,41 +61,15 @@ def mlpersec():
 
 @app.route('/reservoir', methods=['GET'])			#URL to INI config
 def reservoir():
-	reservoir1 = request.args.get('reservoir1')
-	reservoir2 = request.args.get('reservoir2')
-	reservoir3 = request.args.get('reservoir3')
-	reservoir4 = request.args.get('reservoir4')
-
-	config = ConfigParser(allow_no_value=True)
-# parse existing file
-	config.read('settings.ini')
-	config.set('reservoir', 'reservoir1', str(reservoir1))
-	config.set('reservoir', 'reservoir2', str(reservoir2))
-	config.set('reservoir', 'reservoir3', str(reservoir3))
-	config.set('reservoir', 'reservoir4', str(reservoir4))
-
-	with open('settings.ini', 'w') as configfile:
-		config.write(configfile)
-		return render_template('index.html')
+	_web_functions.get_volume_reservoirs_client(volume_reservoirs)
+	_web_functions.set_config_volume_reservoirs(volume_reservoirs)
+	return render_template('index.html', vol_res_1=volume_reservoirs.pomp_1_volume_reservoir, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir)
 
 @app.route('/gpio', methods=['GET'])			#URL to INI config
 def gpio():
-	doseerpompgpio1 = request.args.get('doseerpompgpio1')
-	doseerpompgpio2 = request.args.get('doseerpompgpio2')
-	doseerpompgpio3 = request.args.get('doseerpompgpio3')
-	doseerpompgpio4 = request.args.get('doseerpompgpio4')
-
-	config = ConfigParser(allow_no_value=True)
-# parse existing file
-	config.read('settings.ini')
-	config.set('gpio', 'doseerpompgpio1', str(doseerpompgpio1))
-	config.set('gpio', 'doseerpompgpio2', str(doseerpompgpio2))
-	config.set('gpio', 'doseerpompgpio3', str(doseerpompgpio3))
-	config.set('gpio', 'doseerpompgpio4', str(doseerpompgpio4))
-
-	with open('settings.ini', 'w') as configfile:
-		config.write(configfile)
-		return render_template('index.html')
+	_web_functions.get_gpio_client(gpio)
+	_web_functions.set_config_gpio(gpio)
+	return render_template('index.html', pomp_1_gpio=gpio.pomp_1_gpio, pomp_2_gpio=gpio.pomp_2_gpio, pomp_3_gpio=gpio.pomp_3_gpio, pomp_4_gpio=gpio.pomp_4_gpio)
 
 @app.route('/time', methods=['GET'])			#URL to INI config
 def time():

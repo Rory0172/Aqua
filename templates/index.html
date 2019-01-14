@@ -109,14 +109,14 @@
                     <p>Pomp 3 <input type="submit"></p>
                     <p>Pomp 4 <input type="submit"></p>
                     <hr>
-                    <form>
+                <form action="/reservoir">
                         <h3>Grote van reservoirs</h3>
                         <p>Hoe groot zijn de reservoirs? dit kan ingevuld worden, om een indicatie te geven hoeveel vloeistof er nog beschikbaar is.
                             Invullen als ml</p>
-                        <p>Reservoir 1 <input type="number" name="reservoir1" min="0" max="5000" step="10" value="500">
-                            <p>Reservoir 2 <input type="number" name="reservoir2" min="0" max="5000" step="10" value="500">
-                                <p>Reservoir 3 <input type="number" name="reservoir3" min="0" max="5000" step="10" value="500">
-                                    <p>Reservoir 4 <input type="number" name="reservoir4" min="0" max="5000" step="10" value="500">
+                        <p>Reservoir 1 <input type="number" name="reservoir1" min="0" max="5000" step="10" value="{{ vol_res_1 }}">
+                            <p>Reservoir 2 <input type="number" name="reservoir2" min="0" max="5000" step="10" value="{{ vol_res_2 }}">
+                                <p>Reservoir 3 <input type="number" name="reservoir3" min="0" max="5000" step="10" value="{{ vol_res_3 }}">
+                                    <p>Reservoir 4 <input type="number" name="reservoir4" min="0" max="5000" step="10" value="{{ vol_res_4 }}">
                                         <br>
                                         <br>
                                         <input type="submit">
@@ -132,13 +132,13 @@
                     <br>
                     <br>
                     <hr>
-                    <form>
+                    <form action="/gpio">
                         <h3>Weke doseerpomp is aangesloten op welke GPIO pin</h3>
                         <p>Geef hier aan welke dosringpomp op welke GPIO pin is aangesloten op de Raspberry Pi.</p>
-                        <p>Doseerpomp 1 <input type="number" name="doseerpompgpio1" min="0" max="40" step="1" value="">
-                            <p>Doseerpomp 2 <input type="number" name="doseerpompgpio2" min="0" max="40" step="1" value="">
-                                <p>Doseerpomp 3 <input type="number" name="doseerpompgpio3" min="0" max="40" step="1" value="">
-                                    <p>Doseerpomp 4 <input type="number" name="doseerpompgpio4" min="0" max="40" step="1" value="">
+                        <p>Doseerpomp 1 <input type="number" name="pomp1gpio" min="0" max="40" step="1" value="{{ pomp_1_gpio }}">
+                            <p>Doseerpomp 2 <input type="number" name="pomp2gpio" min="0" max="40" step="1" value="{{ pomp_2_gpio }}">
+                                <p>Doseerpomp 3 <input type="number" name="pomp3gpio" min="0" max="40" step="1" value="{{ pomp_3_gpio }}">
+                                    <p>Doseerpomp 4 <input type="number" name="pomp4gpio" min="0" max="40" step="1" value="{{ pomp_4_gpio }}">
                                         <br>
                                         <br>
                                         <input type="submit"> <br>

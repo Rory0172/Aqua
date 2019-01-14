@@ -5212,7 +5212,6 @@ input[type="button"].btn-block {
   min-height: 315px;
   display: flex;
   align-items: flex-end;
-  margin-right: 20px;
   float: left;
 }
 
@@ -9380,6 +9379,45 @@ a.text-dark:focus {
     text-shadow: none;
     background-color: transparent;
     border: 0;
+}
+
+.text-block1 {
+  text-align: center;
+  width:147px; 
+  height:40px;
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 180px;
+}
+
+.text-block2 {
+  text-align: center;
+  width:147px; 
+  height:40px;
+  position: absolute;
+  margin-left: 162px;
+  margin-top: 180px;
+}
+.text-block3 {
+  text-align: center;
+  width:147px; 
+  height:40px;
+  position: absolute;
+  margin-left: 309px;
+  margin-top: 180px;
+}
+
+.text-block4 {
+  text-align: center;
+  width:147px; 
+  height:40px;
+  position: absolute;
+  margin-left: 456px;
+  margin-top: 180px;
+}
+
+.text-block5 {
+  margin-top: 222px;
 }
 
 .visible {
