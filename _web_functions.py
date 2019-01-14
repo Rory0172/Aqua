@@ -72,10 +72,19 @@ def get_mlpersec_client(self):
 def get_config_volume(self):
   config = ConfigParser(allow_no_value=True)
   config.read('settings.ini')
-  self.pomp_1_volume = config.get('pomp', 'pomp1ml')
-  self.pomp_2_volume = config.get('pomp', 'pomp2ml')
-  self.pomp_3_volume = config.get('pomp', 'pomp3ml')
-  self.pomp_4_volume = config.get('pomp', 'pomp4ml')
+  self.pomp_1_volume = config.get('pomp', 'pomp_1_volume')
+  self.pomp_2_volume = config.get('pomp', 'pomp_2_volume')
+  self.pomp_3_volume = config.get('pomp', 'pomp_3_volume')
+  self.pomp_4_volume = config.get('pomp', 'pomp_4_volume')
+  return self 
+
+def get_config_schedules(self):
+  config = ConfigParser(allow_no_value=True)
+  config.read('settings.ini')
+  self.schedule_pomp_1 = config.get('pomp', 'schedule_pomp_1')
+  self.schedule_pomp_2 = config.get('pomp', 'schedule_pomp_2')
+  self.schedule_pomp_3 = config.get('pomp', 'schedule_pomp_3')
+  self.schedule_pomp_4 = config.get('pomp', 'schedule_pomp_4')
   return self 
 
 def get_config_volume_reservoirs(self):
@@ -111,14 +120,14 @@ def get_config_mlpersec(self):
 def set_config(volumes, schedules):
   config = ConfigParser()
   config.read('settings.ini')
-  config.set('pomp', 'pomp1ml', str(volumes.pomp_1_volume))
-  config.set('pomp', 'pomp2ml', str(volumes.pomp_2_volume))
-  config.set('pomp', 'pomp3ml', str(volumes.pomp_3_volume))
-  config.set('pomp', 'pomp4ml', str(volumes.pomp_4_volume))
-  config.set('pomp', 'pomp1', str(schedules.schedule_pomp_1))
-  config.set('pomp', 'pomp2', str(schedules.schedule_pomp_2))
-  config.set('pomp', 'pomp3', str(schedules.schedule_pomp_3))
-  config.set('pomp', 'pomp4', str(schedules.schedule_pomp_4))
+  config.set('pomp', 'pomp_1_volume', str(volumes.pomp_1_volume))
+  config.set('pomp', 'pomp_2_volume', str(volumes.pomp_2_volume))
+  config.set('pomp', 'pomp_3_volume', str(volumes.pomp_3_volume))
+  config.set('pomp', 'pomp_4_volume', str(volumes.pomp_4_volume))
+  config.set('pomp', 'schedule_pomp_1', str(schedules.schedule_pomp_1))
+  config.set('pomp', 'schedule_pomp_2', str(schedules.schedule_pomp_2))
+  config.set('pomp', 'schedule_pomp_3', str(schedules.schedule_pomp_3))
+  config.set('pomp', 'schedule_pomp_4', str(schedules.schedule_pomp_4))
 
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
@@ -162,9 +171,3 @@ def set_config_mlpersec(mlpersec):
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return mlpersec
-
-def set_schedules_config(self):
-  config.set('pomp', 'pomp1', str(pomp1clean))
-  config.set('pomp', 'pomp2', str(pomp2clean))
-  config.set('pomp', 'pomp3', str(pomp3clean))
-  config.set('pomp', 'pomp4', str(pomp4clean))
