@@ -8,6 +8,12 @@ class Volumes:
   pomp_3_volume = 0
   pomp_4_volume = 0
 
+class volume_available:
+  volume_available_1 = 0
+  volume_available_2 = 0
+  volume_available_3 = 0
+  volume_available_4 = 0
+
 class Schedules:
   schedule_pomp_1 = 0
   schedule_pomp_2 = 0
@@ -34,6 +40,7 @@ class mlpersec:
 
 app = Flask(__name__)
 volumes = Volumes()
+volume_available = volume_available()
 schedules = Schedules()
 volume_reservoirs = volume_reservoirs()
 gpio = gpio()
@@ -42,6 +49,16 @@ mlpersec = mlpersec()
 
 @app.route('/')
 def home():
+	_web_functions.get_config_volume_available(volume_available)
+	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4)
+
+@app.route('/dashboard')
+def dashboard():
+	_web_functions.get_config_volume_available(volume_available)
+	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4)
+
+@app.route('/set')
+def set():
 	_web_functions.get_config_volume(volumes)
 	_web_functions.get_config_schedules(schedules)
 	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
@@ -80,10 +97,6 @@ def time():
 	_web_functions.get_time_client(time)
 	_web_functions.set_config_time(time)
 	return render_template('index.html', time=time.time)
-
-@app.route('/dashboard')
-def dashboard():
-   return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0',port=8080)

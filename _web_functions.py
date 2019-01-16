@@ -78,6 +78,15 @@ def get_config_volume(self):
   self.pomp_4_volume = config.get('pomp', 'pomp_4_volume')
   return self 
 
+def get_config_volume_available(self):
+  config = ConfigParser(allow_no_value=True)
+  config.read('settings.ini')
+  self.volume_available_1 = config.get('volume_available', 'volume_available_1')
+  self.volume_available_2 = config.get('volume_available', 'volume_available_2')
+  self.volume_available_3 = config.get('volume_available', 'volume_available_3')
+  self.volume_available_4 = config.get('volume_available', 'volume_available_4')  
+  return self 
+
 def get_config_schedules(self):
   config = ConfigParser(allow_no_value=True)
   config.read('settings.ini')

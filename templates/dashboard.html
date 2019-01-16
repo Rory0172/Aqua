@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Jekyll and Bootstrap</title>
+    <title>Aquarium dosing pumps</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
@@ -20,10 +20,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="dashboard">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Configuratie</a>
+                                <a class="nav-link" href="set">Configuratie</a>
                             </li>
                     </div>
                 </nav>
@@ -34,7 +34,7 @@
                     <div class="container">
                         <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 32%;">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_1 }}%;">
                             </div>
                         </div>
                     </div>
@@ -42,14 +42,14 @@
                         <h5>pomp1</h5>
                     </div>
                     <div class="text-block1 text-block5">
-                        <h5>100%</h5>
+                        <h5>{{ volume_available_1 }}%</h5>
                     </div>
                 </th>
                 <th>
                     <div class="container">
                         <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 62%;">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_2 }}%;">
                             </div>
                         </div>
                     </div>
@@ -57,14 +57,14 @@
                         <h5>pomp2</h5>
                     </div>
                     <div class="text-block2 text-block5">
-                        <h5>100%</h5>
+                        <h5>{{ volume_available_2 }}%</h5>
                     </div>
                 </th>
                 <th>
                     <div class="container">
                         <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 32%;">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_3 }}%;">
                             </div>
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                         <h5>pomp3</h5>
                     </div>
                     <div class="text-block3 text-block5">
-                        <h5>100%</h5>
+                        <h5>{{ volume_available_3 }}%</h5>
                     </div>
                 </th>
                 <th>
                     <div class="container">
                         <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 62%;">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_4 }}%;">
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <h5>pomp4</h5>
                     </div>
                     <div class="text-block4 text-block5">
-                        <h5>100%</h5>
+                        <h5>{{ volume_available_4 }}%</h5>
                     </div>
                 </th>
             </div>
