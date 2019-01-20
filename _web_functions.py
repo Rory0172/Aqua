@@ -186,16 +186,14 @@ def set_config_mlpersec(mlpersec):
     config.write(configfile)
   return mlpersec
 
-def set_config_volume_available_ml(volume_available_ml):
+def set_config_volume_available_ml(volume_available_ml, volume_reservoirs):
   config = ConfigParser()
   config.read('settings.ini')
-  pomp_1_volume_reservoir = config.getint('reservoir', 'reservoir1')
-  volume_available_1 = 100 * int(volume_available_ml.volume_available_1_ml) / pomp_1_volume_reservoir
-  print str((volume_available_1))
-  print int((volume_available_1))
+  volume_available_1 = 100 * int(volume_available_ml.volume_available_1_ml) / int(volume_reservoirs.pomp_1_volume_reservoir)
   config.set('volume_available', 'volume_available_1_ml', str(volume_available_ml.volume_available_1_ml))
   config.set('volume_available', 'volume_available_1', str(volume_available_1))
 
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return volume_available_ml
+

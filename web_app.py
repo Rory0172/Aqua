@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from configparser import ConfigParser
 import _web_functions
+import os
 
 class Volumes:
   pomp_1_volume = 0
@@ -68,7 +69,7 @@ def dashboard():
 def reservoir_available():
 	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
 	_web_functions.get_volume_available_ml_client(volume_available_ml)
-	_web_functions.set_config_volume_available_ml(volume_available_ml)
+	_web_functions.set_config_volume_available_ml(volume_available_ml, volume_reservoirs)
 	_web_functions.get_config_volume_available(volume_available)
 	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4, vol_res_1=volume_available_ml.volume_available_1_ml, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir)
 
@@ -112,6 +113,11 @@ def time():
 	_web_functions.get_time_client(time)
 	_web_functions.set_config_time(time)
 	return render_template('index.html', time=time.time)
+
+@app.route('/test1')			#URL to INI config
+def test1():
+	os.system("test1.py 1")
+	return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0',port=8080)
