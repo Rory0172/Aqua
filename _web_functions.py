@@ -69,6 +69,13 @@ def get_mlpersec_client(self):
   self.mlpersec = request.args.get('mlpersec')
   return self
 
+def get_volume_available_ml_client(self):
+  self.volume_available_1_ml = request.args.get('vol_res_1')
+  self.volume_available_2_ml = request.args.get('vol_res_2')
+  self.volume_available_3_ml = request.args.get('vol_res_3')
+  self.volume_available_4_ml = request.args.get('vol_res_4')
+  return self
+
 def get_config_volume(self):
   config = ConfigParser(allow_no_value=True)
   config.read('settings.ini')
@@ -137,7 +144,6 @@ def set_config(volumes, schedules):
   config.set('pomp', 'schedule_pomp_2', str(schedules.schedule_pomp_2))
   config.set('pomp', 'schedule_pomp_3', str(schedules.schedule_pomp_3))
   config.set('pomp', 'schedule_pomp_4', str(schedules.schedule_pomp_4))
-
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return volumes, schedules
@@ -149,7 +155,6 @@ def set_config_volume_reservoirs(volume_reservoirs):
   config.set('reservoir', 'reservoir2', str(volume_reservoirs.pomp_2_volume_reservoir))
   config.set('reservoir', 'reservoir3', str(volume_reservoirs.pomp_3_volume_reservoir))
   config.set('reservoir', 'reservoir4', str(volume_reservoirs.pomp_4_volume_reservoir))
-  
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return volume_reservoirs
@@ -180,3 +185,17 @@ def set_config_mlpersec(mlpersec):
   with open('settings.ini', 'w') as configfile:
     config.write(configfile)
   return mlpersec
+
+def set_config_volume_available_ml(volume_available_ml):
+  config = ConfigParser()
+  config.read('settings.ini')
+  pomp_1_volume_reservoir = config.getint('reservoir', 'reservoir1')
+  volume_available_1 = 100 * int(volume_available_ml.volume_available_1_ml) / pomp_1_volume_reservoir
+  print str((volume_available_1))
+  print int((volume_available_1))
+  config.set('volume_available', 'volume_available_1_ml', str(volume_available_ml.volume_available_1_ml))
+  config.set('volume_available', 'volume_available_1', str(volume_available_1))
+
+  with open('settings.ini', 'w') as configfile:
+    config.write(configfile)
+  return volume_available_ml

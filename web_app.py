@@ -14,6 +14,12 @@ class volume_available:
   volume_available_3 = 0
   volume_available_4 = 0
 
+class volume_available_ml:
+  volume_available_1_ml = 0
+  volume_available_2_ml = 0
+  volume_available_3_ml = 0
+  volume_available_4_ml = 0
+
 class Schedules:
   schedule_pomp_1 = 0
   schedule_pomp_2 = 0
@@ -50,12 +56,21 @@ mlpersec = mlpersec()
 @app.route('/')
 def home():
 	_web_functions.get_config_volume_available(volume_available)
-	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4)
+	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
+	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4, vol_res_1=volume_reservoirs.pomp_1_volume_reservoir, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir)
 
 @app.route('/dashboard')
 def dashboard():
 	_web_functions.get_config_volume_available(volume_available)
 	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4)
+
+@app.route('/reservoir_available', methods=['GET'])			#URL to INI config
+def reservoir_available():
+	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
+	_web_functions.get_volume_available_ml_client(volume_available_ml)
+	_web_functions.set_config_volume_available_ml(volume_available_ml)
+	_web_functions.get_config_volume_available(volume_available)
+	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4, vol_res_1=volume_available_ml.volume_available_1_ml, vol_res_2=volume_reservoirs.pomp_2_volume_reservoir, vol_res_3=volume_reservoirs.pomp_3_volume_reservoir, vol_res_4=volume_reservoirs.pomp_4_volume_reservoir)
 
 @app.route('/set')
 def set():
