@@ -27,109 +27,7 @@
                             </li>
                     </div>
                 </nav>
-                <h1 class="text-primary">Aquarium Dosing pumps</h1>
-                <p>Hier kan je de aquarium doseerpump schema's aansturen.</p>
-                <hr>
-                <br>
-                <h3>Dosering</h3>
-                <p>vul hier in hoeveel vloeistof er gegeven moet worden per dosering. Invullen als ml</p>
-                <form action="/setup">
-                    <p>{{ alias_1 }} pump: <input type="number" name="pump1ml" min="0" max="100" step="1" value="{{ getpump1ml }}"></p>
-                    <p>{{ alias_2 }} pump: <input type="number" name="pump2ml" min="0" max="100" step="1" value="{{ getpump2ml }}"></p>
-                    <p>{{ alias_3 }} pump: <input type="number" name="pump3ml" min="0" max="100" step="1" value="{{ getpump3ml }}"></p>
-                    <p>{{ alias_4 }} pump: <input type="number" name="pump4ml" min="0" max="100" step="1" value="{{ getpump4ml }}"></p>
-                    <br>
-                    <p>In dit tabel kan aangegeven worden welke pump op welke dag moet doseren.</p>
-                    <table class="table">
-                        <tr>
-                            <th></th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Maandag</p>
-                            </th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Dinsdag</p>
-                            </th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Woensdag</p>
-                            </th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Donderdag</p>
-                            </th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Vrijdag</p>
-                            </th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Zaterdag</p>
-                            </th>
-                            <th>
-                                <p style="transform: rotate(-90deg);">Zondag</p>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>pump1</td>
-                            <td><input type="checkbox" name="pump1maandag" value="0" {% if '0' in schedule_pump_1 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump1dinsdag" value="1" {% if '1' in schedule_pump_1 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump1woensdag" value="2" {% if '2' in schedule_pump_1 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump1donderdag" value="3" {% if '3' in schedule_pump_1 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump1vrijdag" value="4" {% if '4' in schedule_pump_1 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump1zaterdag" value="5" {% if '5' in schedule_pump_1 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump1zondag" value="6" {% if '6' in schedule_pump_1 %}checked{% endif %}></td>
-                        </tr>
-                        <tr>
-                            <td>pump2</td>
-                            <td><input type="checkbox" name="pump2maandag" value="0" {% if '0' in schedule_pump_2 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump2dinsdag" value="1" {% if '1' in schedule_pump_2 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump2woensdag" value="2" {% if '2' in schedule_pump_2 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump2donderdag" value="3" {% if '3' in schedule_pump_2 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump2vrijdag" value="4" {% if '4' in schedule_pump_2 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump2zaterdag" value="5" {% if '5' in schedule_pump_2 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump2zondag" value="6" {% if '6' in schedule_pump_2 %}checked{% endif %}></td>
-                        </tr>
-                        <tr>
-                            <td>pump3</td>
-                            <td><input type="checkbox" name="pump3maandag" value="0" {% if '0' in schedule_pump_3 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump3dinsdag" value="1" {% if '1' in schedule_pump_3 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump3woensdag" value="2" {% if '2' in schedule_pump_3 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump3donderdag" value="3" {% if '3' in schedule_pump_3 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump3vrijdag" value="4" {% if '4' in schedule_pump_3 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump3zaterdag" value="5" {% if '5' in schedule_pump_3 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump3zondag" value="6" {% if '6' in schedule_pump_3 %}checked{% endif %}></td>
-                        </tr>
-                        <tr>
-                            <td>pump4</td>
-                            <td><input type="checkbox" name="pump4maandag" value="0" {% if '0' in schedule_pump_4 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump4dinsdag" value="1" {% if '1' in schedule_pump_4 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump4woensdag" value="2" {% if '2' in schedule_pump_4 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump4donderdag" value="3" {% if '3' in schedule_pump_4 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump4vrijdag" value="4" {% if '4' in schedule_pump_4 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump4zaterdag" value="5" {% if '5' in schedule_pump_4 %}checked{% endif %}></td>
-                            <td><input type="checkbox" name="pump4zondag" value="6" {% if '6' in schedule_pump_4 %}checked{% endif %}></td>
-                        </tr>
-                    </table>
-                    <input type="submit">
-                </form>
-                <br>
-                <br>
-                <form action="/mlpersec">
-                    <h3>Kalibratie doring pump</h3>
-                    <p>hier moet de aantal seconden (x,x) aangegeven worden hoe lang het duurt om 1ml te pumpen.</p>
-                    <input type="number" name="mlpersec" min="0" max="100" step="0.01" value="{{ mlpersec }}">
-                    <input type="submit">
-                </form>
-                <p>Test de pumps en / of ontlucht de slangen.
-                    <form action="/test">
-                        <button name="pump_test" type="submit" value="0">{{ alias_1 }} test</button>
-                    </form>
-                    <form action="/test">
-                        <button name="pump_test" type="submit" value="1">{{ alias_2 }}test</button>
-                    </form>
-                    <form action="/test">
-                        <button name="pump_test" type="submit" value="2">{{ alias_3 }} test</button>
-                    </form>
-                    <form action="/test">
-                        <button name="pump_test" type="submit" value="3">{{ alias_4 }} test</button>
-                    </form>
-                    <hr>
+
                     <form action="/reservoir">
                         <h3>Grote van reservoirs</h3>
                         <p>Hoe groot zijn de reservoirs? dit kan ingevuld worden, om een indicatie te geven hoeveel vloeistof er nog beschikbaar is.
@@ -143,15 +41,7 @@
                                         <input type="submit">
                     </form>
                     <br>
-                    <hr>
-                    <form action="/time">
-                        <h3>Hoelaat moet er gedoseert worden</h3>
-                        <p>Op welk tijdstip moet er gedoseert worden?</p>
-                        <input type="time" name="time" value="{{ time }}">
-                        <input type="submit"> <br>
-                    </form>
-                    <br>
-                    <br>
+
                     <hr>
                     <form action="/gpio">
                         <h3>Weke doseerpump is aangesloten op welke GPIO pin</h3>

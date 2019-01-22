@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aquarium Dosing Pumps</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-dark bg-dark">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Aquarium Dosing Pumps</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="getdosing">Dosing <span class="sr-only">(current)</span></a>
+                                    <a class="dropdown-item" href="gettime">Time</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getcalibrate">Calibrate</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getreservoirs">Reservoirs</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getalias">Pump Alias</a>
+                                    <a class="dropdown-item" href="getgpio">GPIO Pins</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <br>
+                <p>Hier kan je de aquarium doseerpump schema's aansturen.</p>
+                <hr>
+                <br>
+                <h3>Dosering</h3>
+                <p>vul hier in hoeveel vloeistof er gegeven moet worden per dosering. Invullen als ml</p>
+                <form action="/setdosing">
+                    <p>{{ alias_1 }} pump: <input type="number" name="pump1ml" min="0" max="100" step="1" value="{{ getpump1ml }}"></p>
+                    <p>{{ alias_2 }} pump: <input type="number" name="pump2ml" min="0" max="100" step="1" value="{{ getpump2ml }}"></p>
+                    <p>{{ alias_3 }} pump: <input type="number" name="pump3ml" min="0" max="100" step="1" value="{{ getpump3ml }}"></p>
+                    <p>{{ alias_4 }} pump: <input type="number" name="pump4ml" min="0" max="100" step="1" value="{{ getpump4ml }}"></p>
+                    <br>
+                    <p>In dit tabel kan aangegeven worden welke pump op welke dag moet doseren.</p>
+                    <table class="table">
+                        <tr>
+                            <th></th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Maandag</p>
+                            </th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Dinsdag</p>
+                            </th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Woensdag</p>
+                            </th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Donderdag</p>
+                            </th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Vrijdag</p>
+                            </th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Zaterdag</p>
+                            </th>
+                            <th>
+                                <p style="transform: rotate(-90deg);">Zondag</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>{{ alias_1 }}</td>
+                            <td><input type="checkbox" name="pump1maandag" value="0" {% if '0' in schedule_pump_1 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump1dinsdag" value="1" {% if '1' in schedule_pump_1 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump1woensdag" value="2" {% if '2' in schedule_pump_1 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump1donderdag" value="3" {% if '3' in schedule_pump_1 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump1vrijdag" value="4" {% if '4' in schedule_pump_1 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump1zaterdag" value="5" {% if '5' in schedule_pump_1 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump1zondag" value="6" {% if '6' in schedule_pump_1 %}checked{% endif %}></td>
+                        </tr>
+                        <tr>
+                            <td>{{ alias_2 }}</td>
+                            <td><input type="checkbox" name="pump2maandag" value="0" {% if '0' in schedule_pump_2 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump2dinsdag" value="1" {% if '1' in schedule_pump_2 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump2woensdag" value="2" {% if '2' in schedule_pump_2 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump2donderdag" value="3" {% if '3' in schedule_pump_2 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump2vrijdag" value="4" {% if '4' in schedule_pump_2 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump2zaterdag" value="5" {% if '5' in schedule_pump_2 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump2zondag" value="6" {% if '6' in schedule_pump_2 %}checked{% endif %}></td>
+                        </tr>
+                        <tr>
+                            <td>{{ alias_3 }}</td>
+                            <td><input type="checkbox" name="pump3maandag" value="0" {% if '0' in schedule_pump_3 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump3dinsdag" value="1" {% if '1' in schedule_pump_3 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump3woensdag" value="2" {% if '2' in schedule_pump_3 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump3donderdag" value="3" {% if '3' in schedule_pump_3 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump3vrijdag" value="4" {% if '4' in schedule_pump_3 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump3zaterdag" value="5" {% if '5' in schedule_pump_3 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump3zondag" value="6" {% if '6' in schedule_pump_3 %}checked{% endif %}></td>
+                        </tr>
+                        <tr>
+                            <td>{{ alias_4 }}</td>
+                            <td><input type="checkbox" name="pump4maandag" value="0" {% if '0' in schedule_pump_4 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump4dinsdag" value="1" {% if '1' in schedule_pump_4 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump4woensdag" value="2" {% if '2' in schedule_pump_4 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump4donderdag" value="3" {% if '3' in schedule_pump_4 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump4vrijdag" value="4" {% if '4' in schedule_pump_4 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump4zaterdag" value="5" {% if '5' in schedule_pump_4 %}checked{% endif %}></td>
+                            <td><input type="checkbox" name="pump4zondag" value="6" {% if '6' in schedule_pump_4 %}checked{% endif %}></td>
+                        </tr>
+                    </table>
+                    <input type="submit">
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>

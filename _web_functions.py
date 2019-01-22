@@ -101,6 +101,15 @@ def get_config_volume_available(self):
   self.volume_available_4 = config.get('volume_available', 'volume_available_4')  
   return self 
 
+def get_config_volume_available_ml(self):
+  config = ConfigParser(allow_no_value=False)
+  config.read('settings.ini')
+  self.volume_available_1_ml = config.get('volume_available', 'volume_available_1_ml')
+  self.volume_available_2_ml = config.get('volume_available', 'volume_available_2_ml')
+  self.volume_available_3_ml = config.get('volume_available', 'volume_available_3_ml')
+  self.volume_available_4_ml = config.get('volume_available', 'volume_available_4_ml')  
+  return self 
+
 def get_config_alias(self):
   config = ConfigParser(allow_no_value=False)
   config.read('settings.ini')

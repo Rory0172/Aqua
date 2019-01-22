@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aquarium dosing pumps</title>
+    <title>Aquarium Dosing Pumps</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,116 +18,145 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <a class="navbar-brand" href="#">Aquarium Dosing Pumps</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="dashboard">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="dashboard">Dashboard <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="set">Configuratie</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="getdosing">Dosing</a>
+                                    <a class="dropdown-item" href="gettime">Time</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getcalibrate">Calibrate</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getreservoirs">Reservoirs</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getalias">Pump Alias</a>
+                                    <a class="dropdown-item" href="getgpio">GPIO Pins</a>
+                                </div>
                             </li>
+                        </ul>
                     </div>
                 </nav>
-                <h1 class="text-primary">Aquarium Dosing pumps </h1>
-                <p>Status Dashboard</p>
-                <hr>
-                <table class="table">
-                <tr>
-                <th>
-                    <div class="container">
-                        <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
-                        <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_1 }}%;">
-                            </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <p>Status Dashboard</p>
+                            <hr>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        <div class="container">
+                                            <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_1 }}%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-block1">
+                                            <h5>{{ alias_1 }}</h5>
+                                        </div>
+                                        <div class="text-block1 text-block5">
+                                            <h5>{{ volume_available_1 }}%</h5>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="container">
+                                            <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_2 }}%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-block1">
+                                            <h5>{{ alias_2 }}</h5>
+                                        </div>
+                                        <div class="text-block1 text-block5">
+                                            <h5>{{ volume_available_2 }}%</h5>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="container">
+                                            <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_3 }}%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-block1">
+                                            <h5>{{ alias_3 }}</h5>
+                                        </div>
+                                        <div class="text-block1 text-block5">
+                                            <h5>{{ volume_available_3 }}%</h5>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="container">
+                                            <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
+                                            <div class="progress progress-bar-vertical">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_4 }}%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-block1">
+                                            <h5>{{ alias_4 }}</h5>
+                                        </div>
+                                        <div class="text-block1 text-block5">
+                                            <h5>{{ volume_available_4 }}%</h5>
+                                        </div>
+                                    </th>
+                                <tr>
+                                    <td>
+                                        <form action="/reservoir_available">
+                                            <center>
+                                                <p><input type="number" name="vol_res_1" min="1" max="5000" step="1" value="{{ vol_res_1 }}"> ml </p>
+                                                <input type="submit" value="Reset">
+                                            </center>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="/reservoir_available">
+                                            <center>
+                                                <p><input type="number" name="vol_res_2" min="1" max="5000" step="1" value="{{ vol_res_2 }}"> ml </p>
+                                                <input type="submit" value="Reset">
+                                            </center>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="/reservoir_available">
+                                            <center>
+                                                <p><input type="number" name="vol_res_3" min="1" max="5000" step="1" value="{{ vol_res_3 }}"> ml </p>
+                                                <input type="submit" value="Reset">
+                                            </center>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="/reservoir_available">
+                                            <center>
+                                                <p><input type="number" name="vol_res_4" min="1" max="5000" step="1" value="{{ vol_res_4 }}"> ml </p>
+                                                <input type="submit" value="Reset">
+                                            </center>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="text-block1">
-                        <h5>pump1</h5>
-                    </div>
-                    <div class="text-block1 text-block5">
-                        <h5>{{ volume_available_1 }}%</h5>
-                    </div>
-                </th>
-                <th>
-                    <div class="container">
-                        <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
-                        <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_2 }}%;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-block1">
-                        <h5>pump2</h5>
-                    </div>
-                    <div class="text-block1 text-block5">
-                        <h5>{{ volume_available_2 }}%</h5>
-                    </div>
-                </th>
-                <th>
-                    <div class="container">
-                        <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
-                        <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_3 }}%;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-block1">
-                        <h5>pump3</h5>
-                    </div>
-                    <div class="text-block1 text-block5">
-                        <h5>{{ volume_available_3 }}%</h5>
-                    </div>
-                </th>
-                <th>
-                    <div class="container">
-                        <img src="{{url_for('static', filename='bottle.png')}}" style="position: absolute;">
-                        <div class="progress progress-bar-vertical">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: {{ volume_available_4 }}%;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-block1">
-                        <h5>pump4</h5>
-                    </div>
-                    <div class="text-block1 text-block5">
-                        <h5>{{ volume_available_4 }}%</h5>
-                    </div>
-                </th>
-                <tr>
-                <td>
-                    <form action="/reservoir_available">
-                    <center><p><input type="number" name="vol_res_1" min="1" max="5000" step="1" value="{{ vol_res_1 }}"> ml </p>
-                    <input type="submit" value="Reset"></center>
-                </form>
-                </td>
-                <td>
-                    <form action="/reservoir_available">
-                    <center><p><input type="number" name="vol_res_2" min="1" max="5000" step="1" value="{{ vol_res_2 }}"> ml </p>
-                    <input type="submit" value="Reset"></center>
-                </form>
-                </td>                
-                <td>
-                    <form action="/reservoir_available">
-                    <center><p><input type="number" name="vol_res_3" min="1" max="5000" step="1" value="{{ vol_res_3 }}"> ml </p>
-                    <input type="submit" value="Reset"></center>
-                </form>
-                </td>                
-                <td>
-                    <form action="/reservoir_available">
-                    <center><p><input type="number" name="vol_res_4" min="1" max="5000" step="1" value="{{ vol_res_4 }}"> ml </p>
-                    <input type="submit" value="Reset"></center>
-                </form>
-                </td>
-            </tr>
-            </tr>
-            </table>
+                </div>
             </div>
         </div>
     </div>
-    <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                <!-- JS -->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
