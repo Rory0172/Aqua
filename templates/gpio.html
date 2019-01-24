@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aquarium dosing pumps</title>
+    <title>Aquarium Dosing Pumps</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,33 +18,34 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <a class="navbar-brand" href="#">Aquarium Dosing Pumps</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashboard">Home</a>
-                            </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="set">Configuratie<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="dashboard">Dashboard</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="getdosing">Dosing</a>
+                                    <a class="dropdown-item" href="gettime">Time</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getcalibrate">Calibrate</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getreservoirs">Reservoirs</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="getalias">Pump Alias</a>
+                                    <a class="dropdown-item" href="getgpio">GPIO Pins <span class="sr-only">(current)</span></a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
-
-                    <form action="/reservoir">
-                        <h3>Grote van reservoirs</h3>
-                        <p>Hoe groot zijn de reservoirs? dit kan ingevuld worden, om een indicatie te geven hoeveel vloeistof er nog beschikbaar is.
-                            Invullen als ml</p>
-                        <p>{{ alias_1 }} Reservoir 1 <input type="number" name="reservoir1" min="0" max="5000" step="10" value="{{ vol_res_1 }}">
-                            <p>{{ alias_2 }} Reservoir 2 <input type="number" name="reservoir2" min="0" max="5000" step="10" value="{{ vol_res_2 }}">
-                                <p>{{ alias_3 }} Reservoir 3 <input type="number" name="reservoir3" min="0" max="5000" step="10" value="{{ vol_res_3 }}">
-                                    <p>{{ alias_4 }} Reservoir 4 <input type="number" name="reservoir4" min="0" max="5000" step="10" value="{{ vol_res_4 }}">
-                                        <br>
-                                        <br>
-                                        <input type="submit">
-                    </form>
-                    <br>
-
+                <br>
                     <hr>
-                    <form action="/gpio">
+                    <form action="/setgpio">
                         <h3>Weke doseerpump is aangesloten op welke GPIO pin</h3>
                         <p>Geef hier aan welke dosringpump op welke GPIO pin is aangesloten op de Raspberry Pi.</p>
                         <p>{{ alias_1 }} pump <input type="number" name="pump1gpio" min="0" max="40" step="1" value="{{ pump_1_gpio }}">
@@ -54,22 +56,8 @@
                                         <br>
                                         <input type="submit"> <br>
                     </form>
-                    <br>
-                    <br>
-                    <hr>
-                    <form action="/alias">
-                        <h3>Alias for Dosing pumps</h3>
-                        <p>Register here the name of the dosing pumps.</p>
-                        <p>pump 1 <input type="text" name="alias_1" value="{{ alias_1 }}">
-                            <p>pump 2 <input type="text" name="alias_2" value="{{ alias_2 }}">
-                                <p>pump 3 <input type="text" name="alias_3" value="{{ alias_3 }}">
-                                    <p>pump 4 <input type="text" name="alias_4" value="{{ alias_4 }}">
-                                        <br>
-                                        <br>
-                                        <input type="submit"> <br>
-                                        <br>
-                                        <br>
-                    </form>
+
+                <br>
             </div>
         </div>
     </div>

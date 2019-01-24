@@ -79,39 +79,6 @@ def reservoir_available():
 	_web_functions.get_config_volume_available(volume_available)
 	return render_template('dashboard.html', volume_available_1=volume_available.volume_available_1, volume_available_2=volume_available.volume_available_2, volume_available_3=volume_available.volume_available_3, volume_available_4=volume_available.volume_available_4, vol_res_1=volume_reservoirs.pump_1_volume_reservoir, vol_res_2=volume_reservoirs.pump_2_volume_reservoir, vol_res_3=volume_reservoirs.pump_3_volume_reservoir, vol_res_4=volume_reservoirs.pump_4_volume_reservoir, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
 
-@app.route('/set')
-def set():
-	_web_functions.get_config_volume(volumes)
-	_web_functions.get_config_schedules(schedules)
-	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
-	_web_functions.get_config_gpio(gpio)
-	_web_functions.get_config_time(time)
-	_web_functions.get_config_alias(alias)
-
-	return render_template('index.html', getpump1ml=volumes.pump_1_volume, getpump2ml=volumes.pump_2_volume, getpump3ml=volumes.pump_3_volume, getpump4ml=volumes.pump_4_volume, vol_res_1=volume_reservoirs.pump_1_volume_reservoir, vol_res_2=volume_reservoirs.pump_2_volume_reservoir, vol_res_3=volume_reservoirs.pump_3_volume_reservoir, vol_res_4=volume_reservoirs.pump_4_volume_reservoir, pump_1_gpio=gpio.pump_1_gpio, pump_2_gpio=gpio.pump_2_gpio, pump_3_gpio=gpio.pump_3_gpio, pump_4_gpio=gpio.pump_4_gpio, time=time.time, mlpersec=mlpersec.mlpersec, schedule_pump_1=schedules.schedule_pump_1, schedule_pump_2=schedules.schedule_pump_2, schedule_pump_3=schedules.schedule_pump_3, schedule_pump_4=schedules.schedule_pump_4, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
-
-@app.route('/reservoir', methods=['GET'])
-def reservoir():
-	_web_functions.get_volume_reservoirs_client(volume_reservoirs)
-	_web_functions.set_config_volume_reservoirs(volume_reservoirs)
-	return render_template('index.html', vol_res_1=volume_reservoirs.pump_1_volume_reservoir, vol_res_2=volume_reservoirs.pump_2_volume_reservoir, vol_res_3=volume_reservoirs.pump_3_volume_reservoir, vol_res_4=volume_reservoirs.pump_4_volume_reservoir)
-
-@app.route('/gpio', methods=['GET'])
-def gpio():
-	_web_functions.get_gpio_client(gpio)
-	_web_functions.set_config_gpio(gpio)
-	return render_template('index.html', pump_1_gpio=gpio.pump_1_gpio, pump_2_gpio=gpio.pump_2_gpio, pump_3_gpio=gpio.pump_3_gpio, pump_4_gpio=gpio.pump_4_gpio)
-
-
-
-@app.route('/alias', methods=['GET'])
-def alias():
-	_web_functions.get_alias_client(alias)
-	_web_functions.set_config_alias(alias)
-	return render_template('index.html', alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
-
-
-
 @app.route('/getdosing')
 def getdosing():
 	_web_functions.get_config_volume(volumes)
@@ -156,6 +123,41 @@ def testcalibrate():
 	print (test_script)
 	os.system(str(test_script))
 	return render_template('calibrate.html', mlpersec=mlpersec.mlpersec, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
+
+@app.route('/getreservoirs')
+def getreservoirs():
+	_web_functions.get_config_volume_reservoirs(volume_reservoirs)
+	_web_functions.get_config_alias(alias)
+	return render_template('reservoirs.html', vol_res_1=volume_reservoirs.pump_1_volume_reservoir, vol_res_2=volume_reservoirs.pump_2_volume_reservoir, vol_res_3=volume_reservoirs.pump_3_volume_reservoir, vol_res_4=volume_reservoirs.pump_4_volume_reservoir, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
+
+@app.route('/setreservoirs', methods=['GET'])
+def setreservoirs():
+	_web_functions.get_volume_reservoirs_client(volume_reservoirs)
+	_web_functions.set_config_volume_reservoirs(volume_reservoirs)
+	return render_template('reservoirs.html', vol_res_1=volume_reservoirs.pump_1_volume_reservoir, vol_res_2=volume_reservoirs.pump_2_volume_reservoir, vol_res_3=volume_reservoirs.pump_3_volume_reservoir, vol_res_4=volume_reservoirs.pump_4_volume_reservoir, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
+
+@app.route('/getalias')
+def getalias():
+	_web_functions.get_config_alias(alias)
+	return render_template('alias.html', alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
+
+@app.route('/setalias', methods=['GET'])
+def setalias():
+	_web_functions.get_alias_client(alias)
+	_web_functions.set_config_alias(alias)
+	return render_template('alias.html', alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
+
+@app.route('/getgpio')
+def getgpio():
+	_web_functions.get_config_alias(alias)
+	_web_functions.get_config_gpio(gpio)
+	return render_template('gpio.html', pump_1_gpio=gpio.pump_1_gpio, pump_2_gpio=gpio.pump_2_gpio, pump_3_gpio=gpio.pump_3_gpio, pump_4_gpio=gpio.pump_4_gpio, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
+
+@app.route('/setgpio', methods=['GET'])
+def setgpio():
+	_web_functions.get_gpio_client(gpio)
+	_web_functions.set_config_gpio(gpio)
+	return render_template('gpio.html', pump_1_gpio=gpio.pump_1_gpio, pump_2_gpio=gpio.pump_2_gpio, pump_3_gpio=gpio.pump_3_gpio, pump_4_gpio=gpio.pump_4_gpio, alias_1=alias.alias_1, alias_2=alias.alias_2, alias_3=alias.alias_3, alias_4=alias.alias_4)
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0',port=8080)
